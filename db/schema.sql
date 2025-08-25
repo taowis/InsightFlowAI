@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS clients (id SERIAL PRIMARY KEY, name TEXT NOT NULL, brand_theme JSONB DEFAULT '{}'::jsonb, created_at TIMESTAMP DEFAULT NOW());
+CREATE TABLE IF NOT EXISTS data_sources (id SERIAL PRIMARY KEY, client_id INTEGER REFERENCES clients(id), source TEXT NOT NULL, credentials JSONB DEFAULT '{}'::jsonb, metadata JSONB DEFAULT '{}'::jsonb, created_at TIMESTAMP DEFAULT NOW());
+CREATE TABLE IF NOT EXISTS metrics_daily (id BIGSERIAL PRIMARY KEY, client_id INTEGER REFERENCES clients(id), date DATE NOT NULL, channel TEXT NOT NULL, impressions BIGINT, clicks BIGINT, spend NUMERIC(12,2), conversions BIGINT, revenue NUMERIC(12,2), created_at TIMESTAMP DEFAULT NOW());
+CREATE TABLE IF NOT EXISTS reports (id SERIAL PRIMARY KEY, client_id INTEGER REFERENCES clients(id), period_start DATE NOT NULL, period_end DATE NOT NULL, status TEXT DEFAULT 'draft', narrative TEXT, file_path TEXT, created_at TIMESTAMP DEFAULT NOW(), updated_at TIMESTAMP DEFAULT NOW());

@@ -1,0 +1,5 @@
+[tool.poetry]
+name = "clientpulse-common"
+version = "0.1.0"
+description = "Shared utilities for ClientPulseAI"
+packages = [{"include": "clientpulse_common"}]
